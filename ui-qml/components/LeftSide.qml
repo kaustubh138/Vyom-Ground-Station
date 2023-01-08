@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 6.3
+import QtQuick.Controls 2.0
 
 ColumnLayout{
     id: leftSide
@@ -23,14 +24,8 @@ ColumnLayout{
         Layout.preferredHeight: 34
     }
 
-    Rectangle {
-        id: rightBottom
-        Layout.alignment: Qt.AlignVCenter
-        color:  "blue"
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        Layout.preferredWidth: 50
-        Layout.preferredHeight: 64
+    GraphView {
+
     }
 }
 

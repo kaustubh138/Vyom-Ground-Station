@@ -4,3 +4,4 @@ LeftSide LeftSide.qml
 RightSide RightSide.qml
 TopBar TopBar.qml
 Chart Chart.qml
+GraphView GraphView.qml

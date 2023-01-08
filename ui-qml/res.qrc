@@ -6,5 +6,7 @@
         <file>components/TopBar.qml</file>
         <file>components/LeftSide.qml</file>
         <file>components/RightSide.qml</file>
+        <file>components/Chart.qml</file>
+        <file>components/GraphView.qml</file>
     </qresource>
 </RCC>
