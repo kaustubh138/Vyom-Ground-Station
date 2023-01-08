@@ -1,0 +1,6 @@
+module components
+BottomBar BottomBar.qml
+LeftSide LeftSide.qml
+RightSide RightSide.qml
+TopBar TopBar.qml
+Chart Chart.qml

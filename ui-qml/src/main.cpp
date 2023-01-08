@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("dataFromCpp", new Data());
-    engine.load(QUrl(QStringLiteral("qrc:///main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:///app.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
 
