@@ -2,14 +2,13 @@ import QtQuick 2.8
 import QtCharts 2.2
 import QtQuick.Window 2.2
 
-Window{
-    visible: true
-    width: 640
-    height: 480
+Rectangle {
+    width: parent.width
+    height: parent.height
 
     Connections {
         target: dataFromCpp
-        onSgnl_ValueChanged: {
+        function onSgnl_ValueChanged() {
             if(lineSeries1.count > 5)
                 lineSeries1.remove(0);
             lineSeries1.append(dataFromCpp.GetValue.x, dataFromCpp.GetValue.y)
