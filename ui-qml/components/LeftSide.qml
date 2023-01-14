@@ -15,17 +15,42 @@ ColumnLayout{
     }
 
     Rectangle {
-        id: rightTop
+        id: headingBar
         Layout.alignment: Qt.AlignVCenter
         color: "orange"
         Layout.fillHeight: true
         Layout.fillWidth: true
         Layout.preferredWidth: 50
-        Layout.preferredHeight: 34
+        Layout.preferredHeight: 5
     }
 
     GraphView {
+      Rectangle {
+          id: graphSection
+          Layout.alignment: Qt.AlignVCenter
+          color: "grey"
+          Layout.fillHeight: true
+          Layout.fillWidth: true
+          Layout.preferredWidth: 50
+          Layout.preferredHeight: 64
 
+          GridLayout {
+              anchors.fill: parent
+              columns: 2
+
+              Repeater {
+                  model: 5
+                  Item {
+                      Layout.fillWidth: true
+                      Layout.fillHeight: true
+                      Layout.preferredWidth: 50
+                      Layout.preferredHeight: 34
+
+                      Chart {
+
+                      }
+                  }
+              }
+          }
     }
 }
-
