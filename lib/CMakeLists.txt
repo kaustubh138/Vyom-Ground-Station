@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 cmake_policy(SET CMP0048 NEW)
+set (CMAKE_CXX_STANDARD 17)
 project(vyom-gs-lib VERSION 1.0.0 LANGUAGES C CXX)
 
 ###########################
@@ -9,11 +10,10 @@ find_package(Qt6 COMPONENTS Core Gui Test REQUIRED)
 ###########################
 # Targets
 add_library(${PROJECT_NAME} STATIC
-  src/models/Data.cpp
-  public/models/Data.hpp
-  src/devices/File.cpp
-  src/devices/File.hpp
-)
+  src/models/DummyData.cpp
+  public/models/DummyData.hpp
+  "src/devices/CSVFile.cpp"
+ "src/utils/CSVHandler.cpp")
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC

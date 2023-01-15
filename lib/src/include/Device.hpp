@@ -10,7 +10,7 @@ namespace Vyom
 	{
 	public:
 		virtual std::size_t Send() = 0;
-		virtual std::string Recieve() = 0;
+		virtual void Recieve() = 0;
 	};
 }
 

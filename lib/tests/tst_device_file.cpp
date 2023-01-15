@@ -2,7 +2,7 @@
 #include <QTemporaryFile>
 #include <QDebug>
 
-#include "../src/devices/File.hpp"
+#include "../src/devices/CSVFile.hpp"
 
 static const constexpr char* tempContents = "This is a temperory file";
 
@@ -30,8 +30,25 @@ namespace Vyom::Tests
 
 		void readTest()
 		{
-            Vyom::File device{ "test_data/file_device.csv"};
-			QVERIFY(!device.Recieve().empty());
+            Vyom::Devices::CSVFile device{ "test_data/file_device.csv"};
+			device.Recieve();
+			QVERIFY(device.IsEmpty() == false);
+		}
+
+		void writeTest()
+		{
+			Vyom::Devices::CSVFile device{ "test_data/write_test.csv" };
+			Vyom::Utils::CSVData data = {
+				{"Name", "Age", "Gender"},
+				{"John", "30", "Male"},
+				{"Jane", "25", "Female"},
+				{"Bob", "35", "Male"}
+			};
+			
+			std::size_t sent = device.SetWriteData(data)->Send();
+			device.Recieve();
+			QVERIFY(sent == data.size());
+			QVERIFY(device.IsEmpty());
 		}
 
 	private:
