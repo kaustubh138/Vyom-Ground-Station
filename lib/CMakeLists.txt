@@ -4,13 +4,15 @@ project(vyom-gs-lib VERSION 1.0.0 LANGUAGES C CXX)
 
 ###########################
 # Dependencies
-find_package(Qt6 COMPONENTS Core Gui REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Test REQUIRED)
 
 ###########################
 # Targets
 add_library(${PROJECT_NAME} STATIC
   src/models/Data.cpp
   public/models/Data.hpp
+  src/devices/File.cpp
+  src/devices/File.hpp
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -26,9 +28,9 @@ target_include_directories(${PROJECT_NAME}
       ${CMAKE_CURRENT_SOURCE_DIR}/public/models
      >
   PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/controllers
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src/models
+    ${CMAKE_CURRENT_SOURCE_DIR}/vendor/rapidcsv/src
 )
 
 target_compile_definitions(${PROJECT_NAME}
@@ -54,3 +56,5 @@ set_target_properties(${PROJECT_NAME}
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+
+add_subdirectory(tests)

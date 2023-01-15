@@ -3,6 +3,10 @@
 
 # build directory
 build/
+out/
+
+# Visual Studio Files
+.vs
 
 # CMake files
 CMakeLists.txt.user
