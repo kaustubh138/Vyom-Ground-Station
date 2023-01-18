@@ -15,7 +15,7 @@ function(SETUP_TESTS)
 endfunction()
 
 SETUP_TESTS(
-    device_file
+    device_file utils_csvparser
 )
 
 file(COPY test_data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})

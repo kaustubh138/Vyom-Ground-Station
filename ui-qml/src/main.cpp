@@ -2,7 +2,8 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
-#include "Data.hpp"
+#include "DummyData.hpp"
+#include "src/utils/CSVParser.hpp"
 
 int main(int argc, char *argv[])
 {

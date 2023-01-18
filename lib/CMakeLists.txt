@@ -7,13 +7,17 @@ project(vyom-gs-lib VERSION 1.0.0 LANGUAGES C CXX)
 # Dependencies
 find_package(Qt6 COMPONENTS Core Gui Test REQUIRED)
 
+find_package(boost REQUIRED COMPONENTS lexical_cast)
+include_directories(${Boost_INCLUDE_DIRS})
+
 ###########################
 # Targets
 add_library(${PROJECT_NAME} STATIC
   src/models/DummyData.cpp
   public/models/DummyData.hpp
   "src/devices/CSVFile.cpp"
- "src/utils/CSVHandler.cpp")
+ "src/utils/CSVHandler.cpp"
+ "src/utils/CSVParser.cpp")
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC
@@ -27,7 +31,7 @@ target_include_directories(${PROJECT_NAME}
       ${CMAKE_CURRENT_SOURCE_DIR}/public/controllers
       ${CMAKE_CURRENT_SOURCE_DIR}/public/models
      >
-  PRIVATE
+  
     ${CMAKE_CURRENT_SOURCE_DIR}/src/include
     ${CMAKE_CURRENT_SOURCE_DIR}/src/models
     ${CMAKE_CURRENT_SOURCE_DIR}/vendor/rapidcsv/src
@@ -42,6 +46,8 @@ target_link_libraries(${PROJECT_NAME}
   PUBLIC
     Qt6::Core
     Qt6::Gui
+  PRIVATE 
+    ${Boost_LIBRARIES}
 )
 
 target_compile_features(${PROJECT_NAME}
