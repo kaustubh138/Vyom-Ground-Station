@@ -1,4 +1,4 @@
-#include "DummyData.hpp"
+#include "Data.hpp"
 
 void Data::slt_Timeout()
 {
@@ -11,7 +11,7 @@ void Data::slt_Timeout()
 Data::Data(QObject *parent):QObject(parent)
 {
     m_Timer = new QTimer(this);
-    m_Timer->setInterval((1000 / 5));
+    m_Timer->setInterval(REFRESH_RATE);
     connect(m_Timer, &QTimer::timeout, this, &Data::slt_Timeout);
     m_Timer->start();
 }

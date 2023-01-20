@@ -5,17 +5,20 @@
 #include <QPointF>
 #include <QTimer>
 
+#include "IChartData.hpp"
+
 #define HIGH 100
 #define LOW 0
 
-class Data : public QObject
+class Data 
+    : public QObject, IChartData
 {
     Q_OBJECT
     Q_PROPERTY(QPointF GetValue READ GetValue NOTIFY sgnl_ValueChanged)
 
 public:
     Data(QObject* parent = Q_NULLPTR);
-    QPointF GetValue() const { return m_Value; }
+    virtual QPointF GetValue() const override { return m_Value; }
 
 private:
     QTimer* m_Timer;
