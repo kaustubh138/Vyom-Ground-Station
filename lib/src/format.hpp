@@ -122,7 +122,7 @@ namespace Vyom
         std::string type = "";
     };
 
-    struct CSVItem
+    struct InputData
     {
         TeamID teamID = 0;
         MissionTime missionTime;
@@ -136,8 +136,8 @@ namespace Vyom
         UnknownType software_state;
         UnknownType cmdEcho;
         
-        CSVItem() = default;
-		CSVItem(TeamID team, MissionTime mission, PacketData pack, UnknownType md, std::string& tp, Altitude alt, Temperature temp, Voltage volt, GPSData gps, UnknownType st, UnknownType cmd)
+        InputData() = default;
+		InputData(TeamID team, MissionTime mission, PacketData pack, UnknownType md, std::string& tp, Altitude alt, Temperature temp, Voltage volt, GPSData gps, UnknownType st, UnknownType cmd)
 			: teamID(team), missionTime(mission), packet(pack), mode(md), tp_released(tp), altitude(alt), temperature(temp), voltage(volt), gps(gps), software_state(st), cmdEcho(cmd)
 		{}
     };

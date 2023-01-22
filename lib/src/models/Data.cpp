@@ -1,17 +1,18 @@
 #include "Data.hpp"
 
-void Data::slt_Timeout()
+namespace Vyom
 {
-    int val = rand() % (HIGH - LOW + 1) + LOW;
-    m_Value.setX(m_Value.x()+1);
-    m_Value.setY(val);
-    emit sgnl_ValueChanged();
-}
+    void Data::slt_UpdateChart()
+    {
+	    int val = rand() % (HIGH - LOW + 1) + LOW;
+        m_Value.setX(m_Updater->value().packet.count + 1);
+        m_Value.setY(m_Updater->value().altitude +  1);
+        emit sgnl_ValueChanged();
+    }
 
-Data::Data(QObject *parent):QObject(parent)
-{
-    m_Timer = new QTimer(this);
-    m_Timer->setInterval(REFRESH_RATE);
-    connect(m_Timer, &QTimer::timeout, this, &Data::slt_Timeout);
-    m_Timer->start();
+    Data::Data(Updater* updater, QObject *parent)
+        :m_Updater(updater), QObject(parent)
+    {
+        connect(m_Updater, &Updater::sgnl_DataChanged, this, &Data::slt_UpdateChart);
+    }
 }

@@ -16,7 +16,7 @@
 
 namespace Vyom
 {
-	static std::vector<CSVItem*>* s_PlotData;
+	static std::vector<InputData*>* s_PlotData;
 
 	namespace Utils
 	{
@@ -29,14 +29,14 @@ namespace Vyom
 				m_File.Recieve();
 			}
 
-            std::vector<CSVItem*>* operator()()
+            std::vector<InputData*>* operator()()
             {
-				s_PlotData = new std::vector<CSVItem*>;
+				s_PlotData = new std::vector<InputData*>;
 				int index = 0;
 				for (auto item : m_File)
                 {
 					index = 0;
-					CSVItem* row = new CSVItem();
+					InputData* row = new InputData();
 					row->teamID = TeamID(std::stoi(item[index++]));
 					row->missionTime = MissionTime(item[index++]);
 					row->packet = PacketData{ std::stoull(item[index++]), item[index++] };

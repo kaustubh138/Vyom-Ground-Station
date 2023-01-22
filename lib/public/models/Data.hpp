@@ -1,34 +1,36 @@
 #ifndef DATA_HPP
 #define DATA_HPP
 
-#include <QObject>
 #include <QPointF>
-#include <QTimer>
-
-#include "IChartData.hpp"
+#include "Updater.hpp"
+#include "../src/include/IChartData.hpp"
 
 #define HIGH 100
 #define LOW 0
 
-class Data 
-    : public QObject, IChartData
+namespace Vyom
 {
-    Q_OBJECT
-    Q_PROPERTY(QPointF GetValue READ GetValue NOTIFY sgnl_ValueChanged)
+	class Data
+		: public QObject, IChartData
+	{
+		Q_OBJECT
+		Q_PROPERTY(QPointF GetValue READ GetValue NOTIFY sgnl_ValueChanged)
 
-public:
-    Data(QObject* parent = Q_NULLPTR);
-    virtual QPointF GetValue() const override { return m_Value; }
+	public:
+		Data(Updater* updater, QObject* parent = Q_NULLPTR);
+		virtual QPointF GetValue() const override { return m_Value; }
+		void SetValue(QPointF value) { m_Value = value; }
 
-private:
-    QTimer* m_Timer;
-    QPointF m_Value;
+	private:
+		QPointF m_Value;
+		Updater* m_Updater;
 
-signals:
-    void sgnl_ValueChanged();
+	signals:
+		void sgnl_ValueChanged();
 
-private slots:
-    void slt_Timeout();
-};
+	private slots:
+		void slt_UpdateChart();
+	};
+}
 
 #endif // DATA_HPP

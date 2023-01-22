@@ -31,7 +31,7 @@ namespace Vyom::Tests
 			device.Recieve();
 
 			Utils::CSVParser parser = Utils::CSVParser("test_data/parser_test.csv");
-			std::vector<CSVItem*>* out = parser();
+			std::vector<InputData*>* out = parser();
 		}
 		
 	private:
