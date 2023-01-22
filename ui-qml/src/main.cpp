@@ -5,7 +5,6 @@
 #include <QObject>
 
 #include "Data.hpp"
-#include "src/utils/CSVParser.hpp"
 #include "Updater.hpp"
 #include "../src/devices/CSVFile.hpp"
 

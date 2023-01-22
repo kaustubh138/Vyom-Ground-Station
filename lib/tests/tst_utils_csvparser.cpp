@@ -2,7 +2,7 @@
 #include <QTemporaryFile>
 #include <QDebug>
 
-#include "../src/utils/CSVParser.hpp"
+#include "../devices/CSVFile.hpp"
 
 static const constexpr char* tempContents = "This is a temperory file";
 
@@ -27,11 +27,9 @@ namespace Vyom::Tests
 
 		void parseTest()
 		{
-			Vyom::Devices::CSVFile device{ "test_data/file_device.csv" };
+			Vyom::Devices::CSVFile device{ "test_data/parser_test.csv" };
 			device.Recieve();
-
-			Utils::CSVParser parser = Utils::CSVParser("test_data/parser_test.csv");
-			std::vector<InputData*>* out = parser();
+			std::vector<Vyom::InputData*>* out = device.GetData();
 		}
 		
 	private:

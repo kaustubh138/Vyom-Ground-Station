@@ -60,6 +60,38 @@ namespace Vyom
                 return data;
             }
 
+		private:
+			class iterator {
+			public:
+				iterator(CSVHandler& file, size_t row) : m_Handler(file), m_RowIdx(row) {}
+
+				iterator& operator++() {
+					++m_RowIdx;
+					return *this;
+				}
+
+				std::vector<std::string> operator*() const {
+					return m_Handler.GetRow<std::string>(m_RowIdx);
+				}
+
+				bool operator!=(const iterator& other) const {
+					return m_RowIdx != other.m_RowIdx;
+				}
+
+			private:
+                CSVHandler& m_Handler;
+				size_t m_RowIdx;
+			};
+
+		public:
+			iterator begin() {
+				return iterator(*this, 0);
+			}
+
+			iterator end() {
+				return iterator(*this, GetRowCount() - 1);
+			}
+
         private:
             rapidcsv::Document m_Document;
             DimType m_Size{ NULL, NULL };

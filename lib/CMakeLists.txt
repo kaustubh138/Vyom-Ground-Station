@@ -14,7 +14,7 @@ add_library(${PROJECT_NAME} STATIC
   "public/models/Data.hpp"
   "src/devices/CSVFile.cpp"
   "src/utils/CSVHandler.cpp"
-  "src/utils/CSVParser.cpp" 
+   
   "src/models/Updater.cpp"
   "public/models/Updater.hpp")
 

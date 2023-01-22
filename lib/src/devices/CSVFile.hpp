@@ -2,6 +2,7 @@
 #define CSVFILE_HPP
 
 #include "../utils/CSVHandler.hpp"
+#include "../src/format.hpp"
 
 #include <vector>
 #include <string>
@@ -17,53 +18,30 @@ namespace Vyom
         {
         public:
             CSVFile(const std::string& file_name) 
-                : m_FilePath(file_name), m_Parser()
-            {}
+                : m_FilePath(file_name), m_Handler()
+            {
+                m_ReadData = new std::vector<InputData*>();
+            }
 
             virtual std::size_t Send() override;
             virtual void Recieve() override;
 
             CSVFile* SetWriteData(const Utils::CSVData& data);
+            std::vector<InputData*>* GetData() const { return m_ReadData; }
 
-            inline bool IsEmpty() const { return !(m_Parser.GetRowCount() > 1); }
-            inline std::size_t GetTotalElems() const { return m_Parser.GetRowCount(); }
+            inline bool IsEmpty() const { return m_ReadData->size() == 0; }
+           
+			std::vector<InputData*>::iterator begin() {	return m_ReadData->begin(); }
+            std::vector<InputData*>::iterator end() { return m_ReadData->end(); }
 
         private:
-            class iterator {
-            public:
-                iterator(CSVFile& file, size_t row) : m_Document(file), m_RowIdx(row) {}
-
-                iterator& operator++() {
-                    ++m_RowIdx;
-                    return *this;
-                }
-
-                std::vector<std::string> operator*() const {
-                    return m_Document.m_Parser.GetRow<std::string>(m_RowIdx);
-                }
-
-                bool operator!=(const iterator& other) const {
-                    return m_RowIdx != other.m_RowIdx;
-                }
-
-            private:
-                CSVFile& m_Document;
-                size_t m_RowIdx;
-            };
-
-        public:
-            iterator begin() {
-                return iterator(*this, 0);
-            }
-
-            iterator end() {
-                return iterator(*this, m_Parser.GetRowCount() - 1);
-            }
+            void parse();
 
         private:
             std::string m_FilePath;
 
-            Utils::CSVHandler m_Parser;
+            Utils::CSVHandler m_Handler;
+            std::vector<InputData*>* m_ReadData;
             Utils::CSVData m_WriteData;
         };
     }
