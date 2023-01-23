@@ -12,7 +12,9 @@ find_package(Qt6 COMPONENTS Core Gui Test REQUIRED)
 add_library(${PROJECT_NAME} STATIC
   "src/models/Data.cpp"
   "public/models/Data.hpp"
+  "src/include/Device.hpp"
   "src/devices/CSVFile.cpp"
+  "src/devices/CSVFile.hpp"
   "src/utils/CSVHandler.cpp"
    
   "src/models/Updater.cpp"

@@ -2,11 +2,10 @@
 
 namespace Vyom
 {
-    void Data::slt_UpdateChart()
-    {
-	    int val = rand() % (HIGH - LOW + 1) + LOW;
-        m_Value.setX(m_Updater->value().packet.count + 1);
-        m_Value.setY(m_Updater->value().altitude +  1);
+    void Data::slt_UpdateChart(InputData* data)
+{
+	    m_Value.setX(data->packet.count);
+        m_Value.setY(data->altitude);
         emit sgnl_ValueChanged();
     }
 

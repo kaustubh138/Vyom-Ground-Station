@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTimer>
 #include "../src/format.hpp"
+#include "../src/include/Device.hpp"
 
 #define REFRESH_RATE (1000 / 5)
 
@@ -26,20 +27,20 @@ namespace Vyom
 		Q_PROPERTY(InputData value READ value NOTIFY sgnl_DataChanged)
 
 	public:
-		Updater(QObject* parent = nullptr);
+		Updater(Devices::Device* dev, QObject* parent = nullptr);
 		~Updater();
 
 		InputData value() const { return m_Data; }
 
 	public slots:
-		void slt_SetInputData();
+		void slt_SetInputData(InputData* data);
 
 	signals:
-		void sgnl_DataChanged();
+		void sgnl_DataChanged(InputData* data);
 
 	private:
 		InputData m_Data;
-		QTimer* m_Timer;
+		Devices::Device* m_Device;
 	};
 }
 

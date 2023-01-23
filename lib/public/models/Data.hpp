@@ -29,7 +29,7 @@ namespace Vyom
 		void sgnl_ValueChanged();
 
 	private slots:
-		void slt_UpdateChart();
+		void slt_UpdateChart(InputData* data);
 	};
 }
 

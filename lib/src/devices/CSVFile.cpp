@@ -22,6 +22,12 @@ namespace Vyom
 			return this;
 		}
 
+		void CSVFile::slt_FeedUpdate()
+		{
+			if (m_FeedIndex < m_ReadData->size())
+				emit Device::sgnl_NewData((*m_ReadData)[m_FeedIndex++]);
+		}
+
 		void CSVFile::parse()
 		{
 			int index = 0;

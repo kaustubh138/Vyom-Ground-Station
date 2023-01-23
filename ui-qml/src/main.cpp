@@ -13,14 +13,13 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 	
     QTimer* timer = new QTimer(&app);
-    
-    Vyom::Updater* updater = new Vyom::Updater();
-    
+
+    Vyom::Devices::CSVFile* device = new Vyom::Devices::CSVFile( "parser_test.csv");
+    device->Recieve();
+    Vyom::Updater* updater = new Vyom::Updater(device);
+
     Vyom::Data* altitudeData = new Vyom::Data(updater);
-
-    QObject::connect(timer, &QTimer::timeout,updater, &Vyom::Updater::slt_SetInputData);
-    timer->start(1000); // update every 1000 milliseconds
-
+    
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("dataFromCpp", altitudeData);
     engine.load(QUrl(QStringLiteral("qrc:///app.qml")));

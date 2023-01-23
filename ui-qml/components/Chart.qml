@@ -29,7 +29,7 @@ Rectangle {
         ValueAxis {
             id: axisY1
             min: 0
-            max: 100
+            max: 400
             gridVisible: false
             color: "#ffffff"
             labelsColor: "#ffffff"
