@@ -23,6 +23,14 @@ namespace Vyom
     using Altitude = double;
     using Voltage = double;
 
+    enum class DataModel
+    {
+        Temperature = 0,
+        Altitude = 1,
+        Voltage = 2,
+        None = 3
+    };
+
     struct MissionTime {
         std::chrono::steady_clock::time_point time;
         std::string epoch;

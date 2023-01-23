@@ -5,7 +5,7 @@
 #include "Updater.hpp"
 #include "../src/include/IChartData.hpp"
 
-#define HIGH 100
+#define HIGH 400
 #define LOW 0
 
 namespace Vyom
@@ -17,13 +17,14 @@ namespace Vyom
 		Q_PROPERTY(QPointF GetValue READ GetValue NOTIFY sgnl_ValueChanged)
 
 	public:
-		Data(Updater* updater, QObject* parent = Q_NULLPTR);
+		Data(Updater* updater, DataModel modeltype, QObject* parent = Q_NULLPTR);
 		virtual QPointF GetValue() const override { return m_Value; }
 		void SetValue(QPointF value) { m_Value = value; }
 
 	private:
 		QPointF m_Value;
 		Updater* m_Updater;
+		DataModel m_ModelType;
 
 	signals:
 		void sgnl_ValueChanged();

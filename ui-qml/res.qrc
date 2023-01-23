@@ -6,6 +6,9 @@
         <file>components/TopBar.qml</file>
         <file>components/LeftSide.qml</file>
         <file>components/RightSide.qml</file>
-        <file>components/Chart.qml</file>
+        <file>components/Charts/AltitudeChart.qml</file>
+        <file>components/Charts/Chart.qml</file>
+        <file>components/Charts/TempChart.qml</file>
+        <file>components/Charts/VoltageChart.qml</file>
     </qresource>
 </RCC>

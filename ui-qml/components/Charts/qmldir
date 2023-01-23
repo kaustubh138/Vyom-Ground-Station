@@ -1,0 +1,5 @@
+module Charts
+AltitudeChart AltitudeChart.qml
+TempChart TempChart.qml
+VoltageChart VoltageChart.qml
+Chart Chart.qml

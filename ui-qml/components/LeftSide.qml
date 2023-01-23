@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 6.3
+import "./Charts"
 
 ColumnLayout{
     id: leftSide
@@ -36,8 +37,42 @@ ColumnLayout{
             anchors.fill: parent
             columns: 2
 
-            Repeater {
-                model: 5
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredWidth: 50
+                Layout.preferredHeight: 34
+
+                TempChart {
+
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredWidth: 50
+                Layout.preferredHeight: 34
+
+                AltitudeChart {
+
+                }
+            }
+
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredWidth: 50
+                Layout.preferredHeight: 34
+
+                VoltageChart {
+
+                }
+            }
+
+            Repeater
+            {
+                model: 2
                 Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -53,3 +88,4 @@ ColumnLayout{
 
     }
 }
+

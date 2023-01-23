@@ -7,11 +7,11 @@ Rectangle {
     height: parent.height
 
     Connections {
-        target: dataFromCpp
+        target: voltageData
         function onSgnl_ValueChanged() {
             if(lineSeries1.count > 5)
                 lineSeries1.remove(0);
-            lineSeries1.append(dataFromCpp.GetValue.x, dataFromCpp.GetValue.y)
+            lineSeries1.append(voltageData.GetValue.x, voltageData.GetValue.y)
             axisX.min = lineSeries1.at(0).x
             axisX.max = lineSeries1.at(lineSeries1.count-1).x
         }
@@ -29,7 +29,7 @@ Rectangle {
         ValueAxis {
             id: axisY1
             min: 0
-            max: 400
+            max: 10
             gridVisible: false
             color: "#ffffff"
             labelsColor: "#ffffff"
@@ -49,7 +49,7 @@ Rectangle {
 
         LineSeries {
             id: lineSeries1
-            name: "signal 1"
+            name: "Voltage"
             color: "white"
             axisX: axisX
             axisY: axisY1
