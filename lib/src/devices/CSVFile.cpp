@@ -10,10 +10,11 @@ namespace Vyom
             return m_Handler.Write(m_WriteData);
 		}
 
-		void CSVFile::Recieve()
+		std::size_t CSVFile::Recieve()
 		{
 			m_Handler = Utils::CSVHandler{m_FilePath, Utils::CSVParserModes::ReadMode{} };
 			parse();
+			return m_ReadData->size();
 		}
 
 		CSVFile* CSVFile::SetWriteData(const Utils::CSVData& data)

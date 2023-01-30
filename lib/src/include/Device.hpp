@@ -19,7 +19,7 @@ namespace Vyom
 
 		public:
 			virtual std::size_t Send() = 0;
-			virtual void Recieve() = 0;
+			virtual std::size_t Recieve() = 0;
 
 		public slots:
 			virtual void slt_FeedUpdate() = 0;

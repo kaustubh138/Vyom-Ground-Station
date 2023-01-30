@@ -5,7 +5,7 @@ project(vyom-gs-lib VERSION 1.0.0 LANGUAGES C CXX)
 
 ###########################
 # Dependencies
-find_package(Qt6 COMPONENTS Core Gui Test REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui SerialPort Test REQUIRED)
 
 ###########################
 # Targets
@@ -18,7 +18,11 @@ add_library(${PROJECT_NAME} STATIC
   "src/utils/CSVHandler.cpp"
    
   "src/models/Updater.cpp"
-  "public/models/Updater.hpp")
+  "public/models/Updater.hpp" 
+  
+  "src/devices/Serial.cpp"
+  "src/devices/Serial.hpp"
+)
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC
@@ -47,6 +51,7 @@ target_link_libraries(${PROJECT_NAME}
   PUBLIC
     Qt6::Core
     Qt6::Gui
+    Qt6::SerialPort
 )
 
 target_compile_features(${PROJECT_NAME}

@@ -33,7 +33,7 @@ namespace Vyom
             }
 
             virtual std::size_t Send() override;
-            virtual void Recieve() override;
+            virtual std::size_t Recieve() override;
 
             CSVFile* SetWriteData(const Utils::CSVData& data);
             std::vector<InputData*>* GetData() const { return m_ReadData; }

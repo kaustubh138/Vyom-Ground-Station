@@ -6,16 +6,15 @@
 
 #include "Data.hpp"
 #include "Updater.hpp"
-#include "../src/devices/CSVFile.hpp"
+#include "../src/devices/Serial.hpp"
+
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-	
-    QTimer* timer = new QTimer(&app);
 
-    Vyom::Devices::CSVFile* device = new Vyom::Devices::CSVFile( "parser_test.csv");
-    device->Recieve();
+    Vyom::Devices::Serial* device = new Vyom::Devices::Serial("COM3");
+
     Vyom::Updater* updater = new Vyom::Updater(device);
 
     Vyom::Data* altitudeData = new Vyom::Data(updater, Vyom::DataModel::Altitude);
