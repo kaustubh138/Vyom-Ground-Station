@@ -20,10 +20,14 @@ namespace Vyom
 
 		std::size_t Serial::Recieve()
 		{
-			const QByteArray data = m_SerialPort->readAll();
-			for (QByteArray d : data.split('\n'))
-				m_ReadBuffer.push_back(d);
-			return data.size();
+			if (!m_SerialPort->error())
+			{
+				const QByteArray data = m_SerialPort->readAll();
+				for (QByteArray d : data.split('\n'))
+					m_ReadBuffer.push_back(d);
+				return data.size();
+			}
+			return NULL;
 		}
 
 		std::size_t Serial::Send()
@@ -63,8 +67,14 @@ namespace Vyom
 
 		void Serial::slt_FeedUpdate()
 		{
+			if (!m_SerialPort->bytesAvailable())
+			{
+				qDebug() << "[WARNING] Received Empty String!";
+				return;
+			}
+
 			Recieve();
-			
+
 			QByteArray data = m_ReadBuffer.front();
 			m_ReadBuffer.pop_front();
 			
