@@ -79,11 +79,11 @@ namespace Vyom
 			m_ReadBuffer.pop_front();
 			
 			std::string dataStr = std::string(data.constData(), data.length());
-			m_ReadData = Utils::StringParser(dataStr);
+			//m_ReadData = Utils::StringParser(dataStr);
 
 			std::clog << "[INFO] Data Received: " << dataStr;
 
-			emit sgnl_NewData(m_ReadData);
+			//emit sgnl_NewData(m_ReadData);
 		}
 	}
 }

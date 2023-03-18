@@ -26,130 +26,23 @@ ColumnLayout{
         Layout.fillWidth: true
         Layout.preferredWidth: 50
         Layout.preferredHeight: 5
-   
-           
-           Image {
-                        id: logo
-                      
-                       width: 47
-                       height: 47
-                        source: "qrc:///images/logo.png"
-                        fillMode: Image.PreserveAspectFit
-                    
-                         anchors{
-                              left:headingBar.left
-                              top:headingBar.top
-                              
-                               }
-      
-                    }
-                     
-                   
+
+
                
                     Text{
                          id:cansat
                           anchors {
                               left:headingBar.left
                               top:headingBar.top
-                              leftMargin:47
+                              leftMargin:10
                               topMargin:9
                                     }
                          color:"#ffffff"
                          text: qsTr("CANSAT")
-                         font.pixelSize: 24
+                         font.pixelSize: 23
                           }
 
               
-
-                   Text{
-                         id:state
-                          anchors {
-                              left:cansat.left
-                              top:headingBar.top
-                              leftMargin:150
-                              topMargin:15
-                                    }
-                         color:"#C5B2B2"
-                         text: qsTr("State : ")
-                         font.pixelSize: 18
-                          }
-
-
-                   
-                   Text{
-                         id:preLaunch
-                          anchors {
-                              left:cansat.left
-                              top:headingBar.top
-                              leftMargin:200
-                              topMargin:15
-                                    }
-                         color:"#C5B2B2"
-                         text: qsTr(" Prelaunch ")
-                         font.pixelSize: 18
-                          }
-
-
-
-                   Text{
-                         id:healthyPac
-                          anchors {
-                              left:cansat.left
-                              top:headingBar.top
-                              leftMargin:410
-                              topMargin:15
-                                    }
-                         color:"#C5B2B2"
-                         text: qsTr(" Healthy packets : ")
-                         font.pixelSize: 18
-                          }
-
-
-                     Text{
-                         id:healthyPacCount
-                          anchors {
-                              left:cansat.left
-                              top:headingBar.top
-                              leftMargin:550
-                              topMargin:15
-                                    }
-                         color:"green"
-                         text: qsTr(" 130 ")
-                         font.pixelSize: 18
-                          }
-                           
-
-
-                     Text{
-                         id:corruptPac
-                          anchors {
-                              left:cansat.left
-                              top:headingBar.top
-                              leftMargin:610
-                              topMargin:15
-                                    }
-                         color:"#C5B2B2"
-                         text: qsTr("Corrupted packets :  ")
-                         font.pixelSize: 18
-                          }
-
-                        Text{
-                         id:corruptPacCount
-                          anchors {
-                              left:cansat.left
-                              top:headingBar.top
-                              leftMargin:770
-                              topMargin:15
-                                    }
-                         color:"red"
-                         text: qsTr("0")
-                         font.pixelSize: 18
-                          }
-
-
-
-
-
 
 
 
