@@ -22,6 +22,8 @@ namespace Vyom
 
     using Altitude = double;
     using Voltage = double;
+    using Humidity = double;
+    using Pressure = double;
 
     enum class DataModel
     {
@@ -130,7 +132,39 @@ namespace Vyom
         std::string type = "";
     };
 
-    struct InputData
+    class Accelerometer
+	{
+	public:
+        Accelerometer() = default;
+		Accelerometer(int acc_x, int acc_y, int acc_z)
+			: m_AccX(acc_x),
+			  m_AccY(acc_y),
+			  m_AccZ(acc_z)
+		{}
+
+	private:
+        int m_AccX, m_AccY, m_AccZ;
+	};
+
+	class Gyroscope
+	{
+	public:
+        Gyroscope() = default;
+		Gyroscope(int gyro_x, int gyro_y, int gyro_z)
+			: m_GyroX(gyro_x),
+			  m_GyroY(gyro_y),
+			  m_GyroZ(gyro_z)
+		{}
+
+	private:
+        int m_GyroX, m_GyroY, m_GyroZ;
+	};
+
+
+	/*
+	 * Old Format:
+
+	struct InputData
     {
         TeamID teamID = 0;
         MissionTime missionTime;
@@ -149,6 +183,29 @@ namespace Vyom
 			: teamID(team), missionTime(mission), packet(pack), mode(md), tp_released(tp), altitude(alt), temperature(temp), voltage(volt), gps(gps), software_state(st), cmdEcho(cmd)
 		{}
     };
+
+	*/
+
+    // New Format for Test
+    struct InputData
+    {
+        std::string teamName{};
+        std::string teamID{};
+        UnknownType dk{};
+        Altitude altitude = 0;
+        Temperature temperature;
+        Pressure pressure = 0;
+        UnknownType dk2{};
+        UnknownType missionTime;
+        Accelerometer accData{};
+        Gyroscope gyroData{};
+        Voltage voltage = 0;
+        Humidity humidity = 0;
+        UnknownType dk3{};
+
+        InputData() = default;
+    };
+
 }
 
 #endif // FORMAT_HPP

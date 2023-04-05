@@ -40,6 +40,7 @@ namespace Vyom
 
 		private:
 			QSerialPort* m_SerialPort;
+			QTimer* m_RefreshTimer;
 			InputData* m_ReadData;
 			std::string m_PortName;
 

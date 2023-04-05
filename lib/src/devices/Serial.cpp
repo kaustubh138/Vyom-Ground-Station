@@ -9,7 +9,10 @@ namespace Vyom
 			: m_PortName(portName), m_ReadData(new InputData()), m_ReadBuffer()
 		{
 			open();
-			connect(m_SerialPort, &QSerialPort::readyRead, this, &Serial::slt_FeedUpdate);
+			m_RefreshTimer = new QTimer(this);
+			m_RefreshTimer->setInterval(100);
+			connect(m_RefreshTimer, &QTimer::timeout, this, &Serial::slt_FeedUpdate);
+			m_RefreshTimer->start();
 		}
 
 		Serial::~Serial()
@@ -23,9 +26,13 @@ namespace Vyom
 			if (!m_SerialPort->error())
 			{
 				const QByteArray data = m_SerialPort->readAll();
-				for (QByteArray d : data.split('\n'))
-					m_ReadBuffer.push_back(d);
-				return data.size();
+				if (!data.isEmpty() && data.size() >= 79)
+				{
+					for (QByteArray d : data.split('\n'))
+						m_ReadBuffer.push_back(d);
+					return data.size();
+				}
+				return NULL;
 			}
 			return NULL;
 		}
@@ -43,11 +50,11 @@ namespace Vyom
 			m_SerialPort->open(QIODevice::ReadWrite);
 
 			// Todo: set properties according to settings
-			m_SerialPort->setBaudRate(QSerialPort::Baud9600);
-			m_SerialPort->setStopBits(QSerialPort::OneStop);
-			m_SerialPort->setParity(QSerialPort::NoParity);
-			m_SerialPort->setDataBits(QSerialPort::Data8);
-			m_SerialPort->setFlowControl(QSerialPort::NoFlowControl);
+			m_SerialPort->setBaudRate(QSerialPort::Baud115200);
+			//m_SerialPort->setStopBits(QSerialPort::OneStop);
+			//m_SerialPort->setParity(QSerialPort::NoParity);
+			//m_SerialPort->setDataBits(QSerialPort::Data8);
+			//m_SerialPort->setFlowControl(QSerialPort::NoFlowControl);
 
 			if (m_SerialPort->isOpen() == true)
 				qDebug() << "[INFO] Opened Serial Port: " << m_PortName.c_str();
@@ -67,23 +74,30 @@ namespace Vyom
 
 		void Serial::slt_FeedUpdate()
 		{
-			if (!m_SerialPort->bytesAvailable())
+			try
 			{
-				qDebug() << "[WARNING] Received Empty String!";
-				return;
+				if (!m_SerialPort->bytesAvailable())
+					return;
+
+				if (Recieve() != NULL)
+				{
+					QByteArray data = m_ReadBuffer.front();
+					m_ReadBuffer.pop_front();
+
+					std::string dataStr = std::string(data.constData(), data.length());
+					if (!dataStr.empty())
+					{
+						m_ReadData = Utils::StringParser(dataStr);
+
+						std::clog << "[INFO] Data Received: " << dataStr;
+						emit sgnl_NewData(m_ReadData);
+					}
+				}
 			}
-
-			Recieve();
-
-			QByteArray data = m_ReadBuffer.front();
-			m_ReadBuffer.pop_front();
-			
-			std::string dataStr = std::string(data.constData(), data.length());
-			m_ReadData = Utils::StringParser(dataStr);
-
-			std::clog << "[INFO] Data Received: " << dataStr;
-
-			emit sgnl_NewData(m_ReadData);
+			catch (...)
+			{
+				qDebug() << "[WARNING] Unexpected data received";
+			}
 		}
 	}
 }

@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    Vyom::Devices::Serial* device = new Vyom::Devices::Serial("COM1");
+    Vyom::Devices::Serial* device = new Vyom::Devices::Serial("COM3");
 
     Vyom::Updater* updater = new Vyom::Updater(device);
 

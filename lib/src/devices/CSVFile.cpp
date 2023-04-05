@@ -31,25 +31,26 @@ namespace Vyom
 
 		void CSVFile::parse()
 		{
-			int index = 0;
-			for (auto item : m_Handler)
-			{
-				index = 0;
-				InputData* row = new InputData();
-				row->teamID = TeamID(std::stoi(item[index++]));
-				row->missionTime = MissionTime(item[index++]);
-				row->packet = PacketData{ std::stoull(item[index++]), item[index++] };
-				row->mode = item[index++];													// Mode
-				row->tp_released = item[index++];						// TP_RELEASED
-				row->altitude = Altitude(std::stod(item[index++]));
-				row->temperature = Temperature(std::stod(item[index++]), Temperature::Unit::Celsius);
-				row->voltage = Voltage(std::stod(item[index++]));
-				row->gps = GPSData(item[index++], std::stod(item[index++]), std::stod(item[index++]), std::stod(item[index++]), std::stoi(item[index++])); // GPS = Latitude Longitude Time Sat
-				row->software_state = item[index++];		// Software State
-				row->cmdEcho = item[index++];				// CMD Echo
+			// Format Temperorily Changed
+			//int index = 0;
+			//for (auto item : m_Handler)
+			//{
+			//	index = 0;
+			//	InputData* row = new InputData();
+			//	row->teamID = TeamID(std::stoi(item[index++]));
+			//	row->missionTime = MissionTime(item[index++]);
+			//	row->packet = PacketData{ std::stoull(item[index++]), item[index++] };
+			//	row->mode = item[index++];													// Mode
+			//	row->tp_released = item[index++];						// TP_RELEASED
+			//	row->altitude = Altitude(std::stod(item[index++]));
+			//	row->temperature = Temperature(std::stod(item[index++]), Temperature::Unit::Celsius);
+			//	row->voltage = Voltage(std::stod(item[index++]));
+			//	row->gps = GPSData(item[index++], std::stod(item[index++]), std::stod(item[index++]), std::stod(item[index++]), std::stoi(item[index++])); // GPS = Latitude Longitude Time Sat
+			//	row->software_state = item[index++];		// Software State
+			//	row->cmdEcho = item[index++];				// CMD Echo
 
-				m_ReadData->emplace_back(row);
-			}
+			//	m_ReadData->emplace_back(row);
+			//}
 		}
 	}
 }

@@ -25,6 +25,7 @@ namespace Vyom
 		QPointF m_Value;
 		Updater* m_Updater;
 		DataModel m_ModelType;
+		unsigned int m_PacketNum;
 
 	signals:
 		void sgnl_ValueChanged();

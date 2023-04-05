@@ -23,25 +23,33 @@ namespace Vyom
 				dataVec.push_back(substr);
 			}
 
-			InputData* row = new InputData();
-			for (std::string d : dataVec)
+			unsigned int index = 0;
+			try
 			{
-				row->teamID = TeamID(std::stoi(d));
-				row->missionTime = MissionTime(d);
-				row->packet = PacketData{ std::stoull(d), d };
-				row->mode = d;												// Mode
-				row->tp_released = d;										// TP_RELEASED
-				row->altitude = Altitude(std::stod(d));
-				row->temperature = Temperature(std::stod(d), Temperature::Unit::Celsius);
-				row->voltage = Voltage(std::stod(d));
-				row->gps = GPSData(d, std::stod(d), std::stod(d),
-					std::stod(d), std::stoi(d));							// GPS = Latitude Longitude Time Sat
-				row->software_state = d;									// Software State
-				row->cmdEcho = d;											// CMD Echo
-			}
-			
-			return row;
+				InputData* row = new InputData{};
+				row->teamName = dataVec[index++];
+				row->teamID = dataVec[index++];
+				row->dk = dataVec[index++];
+				row->altitude = Altitude(std::stod(dataVec[index++]));
+				row->pressure = Pressure(std::stod(dataVec[index++]));
+				row->temperature = Temperature(std::stod(dataVec[index++]), Temperature::Unit::Celsius);
+				row->dk2 = dataVec[index++];
+				row->accData = Accelerometer(std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]));
+				row->gyroData = Gyroscope(std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]));
+				row->missionTime = dataVec[index++];
+				row->humidity = Humidity(std::stoi(dataVec[index++]));
+				row->voltage = Voltage(std::stod(dataVec[index++]));
 
+				return row;
+			}
+			catch(...)
+			{
+				return nullptr;
+			}
 		}
 	}
 }

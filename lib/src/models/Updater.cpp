@@ -16,7 +16,6 @@ namespace Vyom
 
 	void Updater::slt_SetInputData(InputData* data)
 	{
-		data->altitude;
 		emit sgnl_DataChanged(data);
 	}
 
