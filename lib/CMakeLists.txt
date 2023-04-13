@@ -17,12 +17,14 @@ add_library(${PROJECT_NAME} STATIC
   "src/devices/CSVFile.hpp"
   "src/utils/CSVHandler.cpp"
    
+  "src/utils/CircularBuffer.hpp"
+
   "src/models/Updater.cpp"
   "public/models/Updater.hpp" 
   
   "src/devices/Serial.cpp"
   "src/devices/Serial.hpp"
-)
+ )
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC

@@ -15,7 +15,7 @@ function(SETUP_TESTS)
 endfunction()
 
 SETUP_TESTS(
-    device_file utils_csvparser device_serial
+    device_file utils_csvparser device_serial utils_circular_buffer
 )
 
 file(COPY test_data DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
