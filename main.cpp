@@ -6,7 +6,7 @@
 
 #include "Data.hpp"
 #include "Updater.hpp"
-#include "../src/devices/Serial.hpp"
+#include "src/devices/Serial.hpp"
 
 
 int main(int argc, char *argv[])
