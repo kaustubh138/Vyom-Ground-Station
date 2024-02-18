@@ -24,7 +24,7 @@ Rectangle {
         anchors.fill: parent
         animationOptions: ChartView.NoAnimation
         antialiasing: true
-        backgroundColor: "#1f1f1f"
+        backgroundColor: "#222B45"
 
         ValueAxis {
             id: axisY1
