@@ -29,7 +29,7 @@ namespace Vyom
 				if (!data.isEmpty() && data.size() >= 79)
 				{
 					for (QByteArray d : data.split('\n'))
-						m_ReadBuffer.push_back(d);
+						m_ReadBuffer.Insert(d);
 					return data.size();
 				}
 				return NULL;
@@ -81,9 +81,8 @@ namespace Vyom
 
 				if (Recieve() != NULL)
 				{
-					QByteArray data = m_ReadBuffer.front();
-					m_ReadBuffer.pop_front();
-
+					QByteArray data = m_ReadBuffer.Get().value();
+					
 					std::string dataStr = std::string(data.constData(), data.length());
 					if (!dataStr.empty())
 					{

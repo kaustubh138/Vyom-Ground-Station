@@ -11,6 +11,7 @@
 
 #include "Device.hpp"
 #include "../utils/StringParser.hpp"
+#include "../utils/CircularBuffer.hpp"
 
 #include <string>
 #include <iostream>
@@ -44,7 +45,7 @@ namespace Vyom
 			InputData* m_ReadData;
 			std::string m_PortName;
 
-			QList<QByteArray> m_ReadBuffer;
+			Utils::CircularBuffer<QByteArray, 10> m_ReadBuffer;
 		};
 	}
 }
