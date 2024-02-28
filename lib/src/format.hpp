@@ -6,6 +6,8 @@
 #include <string>
 #include <algorithm>
 
+#include <QString>
+
 /*
 * Format of input data
 *	TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, MODE,
@@ -160,52 +162,50 @@ namespace Vyom
         int m_GyroX, m_GyroY, m_GyroZ;
 	};
 
+    class Gnss
+    {
+    public:
+        Gnss() = default;
+        Gnss(Altitude alt, std::string lat, std::string longitude, std::string stats)
+            : m_Altitude(alt),
+            m_Lat(lat),
+            m_Long(longitude),
+            m_Stats(stats)
+        {
 
-	/*
-	 * Old Format:
+        }
+
+    private:
+        Altitude m_Altitude;
+        std::string m_Lat;
+        std::string m_Long;
+        std::string m_Stats;
+    };
 
 	struct InputData
     {
-        TeamID teamID = 0;
-        MissionTime missionTime;
-        PacketData packet;
-        UnknownType mode;
-        UnknownType tp_released;
-        Altitude altitude = 0;
-        Temperature temperature;
-        Voltage voltage = 0;
-        GPSData gps;
-        UnknownType software_state;
-        UnknownType cmdEcho;
-        
-        InputData() = default;
-		InputData(TeamID team, MissionTime mission, PacketData pack, UnknownType md, std::string& tp, Altitude alt, Temperature temp, Voltage volt, GPSData gps, UnknownType st, UnknownType cmd)
-			: teamID(team), missionTime(mission), packet(pack), mode(md), tp_released(tp), altitude(alt), temperature(temp), voltage(volt), gps(gps), software_state(st), cmdEcho(cmd)
-		{}
-    };
-
-	*/
-
-    // New Format for Test
-    struct InputData
-    {
-        std::string teamName{};
-        std::string teamID{};
-        UnknownType dk{};
-        Altitude altitude = 0;
-        Temperature temperature;
-        Pressure pressure = 0;
-        UnknownType dk2{};
-        UnknownType missionTime;
-        Accelerometer accData{};
-        Gyroscope gyroData{};
-        Voltage voltage = 0;
-        Humidity humidity = 0;
-        UnknownType dk3{};
+        QString telemeteryView;
+        std::string teamId;
+        MissionTime timeStamp;
+        unsigned int packetCount;
+        Accelerometer accData;
+        Gyroscope pitchRollYaw;
+        Altitude altitude;
+        Temperature temp;
+        Voltage voltage;
+        Gnss gnssData;
+        int rpm1;
+        int rpm2;
+        std::string fswState;
+        std::string camera;
+        std::string mechgyro;
+        std::string lidServoEjection;
+        std::string paraControl;
+        std::string finsDeployment;
+        std::string buzzStatus;
 
         InputData() = default;
     };
-
 }
 
 #endif // FORMAT_HPP

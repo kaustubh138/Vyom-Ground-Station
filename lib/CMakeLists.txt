@@ -24,7 +24,9 @@ add_library(${PROJECT_NAME} STATIC
   
   "src/devices/Serial.cpp"
   "src/devices/Serial.hpp"
- )
+
+  "public/models/TelemeteryView.hpp"
+  "src/models/TelemeteryView.cpp")
 
 target_include_directories(${PROJECT_NAME}
   PUBLIC

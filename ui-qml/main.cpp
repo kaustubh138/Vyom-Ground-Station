@@ -5,6 +5,7 @@
 #include <QObject>
 
 #include "Data.hpp"
+#include "TelemeteryView.hpp"
 #include "Updater.hpp"
 #include "../src/devices/Serial.hpp"
 
@@ -21,12 +22,17 @@ int main(int argc, char *argv[])
     Vyom::Data* temperatureData = new Vyom::Data(updater, Vyom::DataModel::Temperature);
     Vyom::Data* voltageData = new Vyom::Data(updater, Vyom::DataModel::Voltage);
     Vyom::Data* dummyData = new Vyom::Data(updater, Vyom::DataModel::None);
+
+    Vyom::TelemeteryView* telemetery = new Vyom::TelemeteryView(updater);
     
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("altitudeData", altitudeData);
     engine.rootContext()->setContextProperty("tempData", temperatureData);
     engine.rootContext()->setContextProperty("voltageData", voltageData);
     engine.rootContext()->setContextProperty("dummyData", dummyData);
+    
+    engine.rootContext()->setContextProperty("telemeteryViewModel", telemetery);
+    
     engine.load(QUrl(QStringLiteral("qrc:///app.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

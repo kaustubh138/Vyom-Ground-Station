@@ -4,14 +4,14 @@ namespace Vyom
 {
     void Data::slt_UpdateChart(InputData* data)
 	{
-	    m_Value.setX(m_PacketNum++);
+	    m_Value.setX(data->packetCount);
 	    //m_Value.setX(data->packet.count);
 		
         switch (m_ModelType)
         {
 			case(DataModel::Temperature):
             {
-                m_Value.setY(data->temperature.GetTemperature());
+                m_Value.setY(data->temp.GetTemperature());
                 break;
             }
         	case(DataModel::Altitude):

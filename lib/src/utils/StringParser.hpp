@@ -16,33 +16,45 @@ namespace Vyom
 
 			std::istringstream stream{data};
 			std::string buffer{};
+			
+			InputData* row = new InputData{};
+			row->telemeteryView = "";
 
 			while (stream.good()) {
 				std::string substr;
 				std::getline(stream, substr, ',');
 				dataVec.push_back(substr);
+				row->telemeteryView += QString::fromStdString(substr + ", ");
 			}
 
 			unsigned int index = 0;
 			try
 			{
-				InputData* row = new InputData{};
-				row->teamName = dataVec[index++];
-				row->teamID = dataVec[index++];
-				row->dk = dataVec[index++];
+				row->teamId = dataVec[index++];
+				row->timeStamp = MissionTime(dataVec[index++]);
+				row->packetCount = std::stoi(dataVec[index++]);
+				row->accData = Accelerometer(std::stod(dataVec[index++]),
+					std::stod(dataVec[index++]),
+					std::stod(dataVec[index++]));
+				row->pitchRollYaw = Gyroscope(std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]));
 				row->altitude = Altitude(std::stod(dataVec[index++]));
-				row->pressure = Pressure(std::stod(dataVec[index++]));
-				row->temperature = Temperature(std::stod(dataVec[index++]), Temperature::Unit::Celsius);
-				row->dk2 = dataVec[index++];
-				row->accData = Accelerometer(std::stoi(dataVec[index++]),
-					std::stoi(dataVec[index++]),
-					std::stoi(dataVec[index++]));
-				row->gyroData = Gyroscope(std::stoi(dataVec[index++]),
-					std::stoi(dataVec[index++]),
-					std::stoi(dataVec[index++]));
-				row->missionTime = dataVec[index++];
-				row->humidity = Humidity(std::stoi(dataVec[index++]));
+				row->temp = Temperature(std::stod(dataVec[index++]), Temperature::Unit::Celsius);
 				row->voltage = Voltage(std::stod(dataVec[index++]));
+				row->gnssData = Gnss(Altitude(std::stoi(dataVec[index++])),
+					dataVec[index++],
+					dataVec[index++],
+					dataVec[index++]);
+				row->rpm1 = std::stoi(dataVec[index++]);
+				row->rpm2 = std::stoi(dataVec[index++]);
+				row->fswState = dataVec[index++];
+				row->camera = dataVec[index++];
+				row->mechgyro = dataVec[index++];
+				row->lidServoEjection = dataVec[index++];
+				row->paraControl = dataVec[index++];
+				row->finsDeployment = dataVec[index++];
+				row->buzzStatus = dataVec[index++];
 
 				return row;
 			}

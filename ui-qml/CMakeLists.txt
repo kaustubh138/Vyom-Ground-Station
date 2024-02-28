@@ -11,7 +11,7 @@ find_package(Qt6 COMPONENTS Core Gui Qml Quick QuickControls2 Widgets REQUIRED)
 # Targets
 
 add_executable(${PROJECT_NAME}
-    "images/main.cpp"
+    "main.cpp"
     res.qrc
 )
 
