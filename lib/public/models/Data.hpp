@@ -5,7 +5,7 @@
 #include "Updater.hpp"
 #include "../src/include/IChartData.hpp"
 
-#define HIGH 400
+#define HIGH 10
 #define LOW 0
 
 namespace Vyom

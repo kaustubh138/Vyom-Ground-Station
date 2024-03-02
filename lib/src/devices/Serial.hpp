@@ -45,7 +45,7 @@ namespace Vyom
 			InputData* m_ReadData;
 			std::string m_PortName;
 
-			Utils::CircularBuffer<QByteArray, 10> m_ReadBuffer;
+			QList<QByteArray> m_ReadBuffer;
 		};
 	}
 }

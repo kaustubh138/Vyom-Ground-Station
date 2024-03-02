@@ -185,24 +185,24 @@ namespace Vyom
 	struct InputData
     {
         QString telemeteryView;
-        std::string teamId;
-        MissionTime timeStamp;
+        std::string teamId{};
+        std::string timeStamp{};
         unsigned int packetCount;
         Accelerometer accData;
         Gyroscope pitchRollYaw;
-        Altitude altitude;
-        Temperature temp;
+        unsigned int altitude;
+        double temp;
         Voltage voltage;
         Gnss gnssData;
         int rpm1;
         int rpm2;
-        std::string fswState;
-        std::string camera;
-        std::string mechgyro;
-        std::string lidServoEjection;
-        std::string paraControl;
-        std::string finsDeployment;
-        std::string buzzStatus;
+        std::string fswState{};
+        std::string camera{};
+        std::string mechgyro{};
+        std::string lidServoEjection{};
+        std::string paraControl{};
+        std::string finsDeployment{};
+        std::string buzzStatus{};
 
         InputData() = default;
     };

@@ -26,10 +26,11 @@ namespace Vyom
 			if (!m_SerialPort->error())
 			{
 				const QByteArray data = m_SerialPort->readAll();
-				if (!data.isEmpty() && data.size() >= 79)
+				if (!data.isEmpty() && data.size() >= 105)
 				{
+					m_ReadBuffer.clear();
 					for (QByteArray d : data.split('\n'))
-						m_ReadBuffer.Insert(d);
+						m_ReadBuffer.push_back(d);
 					return data.size();
 				}
 				return NULL;
@@ -50,7 +51,7 @@ namespace Vyom
 			m_SerialPort->open(QIODevice::ReadWrite);
 
 			// Todo: set properties according to settings
-			m_SerialPort->setBaudRate(QSerialPort::Baud115200);
+			m_SerialPort->setBaudRate(QSerialPort::Baud9600);
 			//m_SerialPort->setStopBits(QSerialPort::OneStop);
 			//m_SerialPort->setParity(QSerialPort::NoParity);
 			//m_SerialPort->setDataBits(QSerialPort::Data8);
@@ -81,14 +82,15 @@ namespace Vyom
 
 				if (Recieve() != NULL)
 				{
-					QByteArray data = m_ReadBuffer.Get().value();
-					
+					QByteArray data = m_ReadBuffer.front();
+					m_ReadBuffer.pop_front();
+
 					std::string dataStr = std::string(data.constData(), data.length());
 					if (!dataStr.empty())
 					{
 						m_ReadData = Utils::StringParser(dataStr);
 
-						std::clog << "[INFO] Data Received: " << dataStr;
+						std::clog << "[INFO] Data Received: " << dataStr << std::endl;
 						emit sgnl_NewData(m_ReadData);
 					}
 				}

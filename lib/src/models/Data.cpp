@@ -3,34 +3,35 @@
 namespace Vyom
 {
     void Data::slt_UpdateChart(InputData* data)
-	{
-	    m_Value.setX(data->packetCount);
-	    //m_Value.setX(data->packet.count);
-		
+    {
+        static unsigned int packetCount = 0;
+        m_Value.setX(packetCount++);
+        //m_Value.setX(data->packet.count);
+
         switch (m_ModelType)
         {
-			case(DataModel::Temperature):
-            {
-                m_Value.setY(data->temp.GetTemperature());
-                break;
-            }
-        	case(DataModel::Altitude):
-            {
-                m_Value.setY(data->altitude);
-                break;
-            }
-        	case(DataModel::Voltage):
-            {
-                m_Value.setY(data->voltage);
-                break;
-            }
-	        default: {
-				int val = rand() % (HIGH - LOW + 1) + LOW;
-				m_Value.setX(m_Value.x() + 1);
-				m_Value.setY(val);
-	        }
+        case(DataModel::Temperature):
+        {
+            m_Value.setY(data->temp);
+            break;
         }
-        
+        case(DataModel::Altitude):
+        {
+            m_Value.setY(data->altitude);
+            break;
+        }
+        case(DataModel::Voltage):
+        {
+            m_Value.setY(data->voltage);
+            break;
+        }
+        default: {
+            int val = rand() % (HIGH - LOW + 1) + LOW;
+            m_Value.setX(m_Value.x() + 1);
+            m_Value.setY(val);
+        }
+        }
+
         emit sgnl_ValueChanged();
     }
 

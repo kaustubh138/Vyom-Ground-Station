@@ -27,34 +27,52 @@ namespace Vyom
 				row->telemeteryView += QString::fromStdString(substr + ", ");
 			}
 
-			unsigned int index = 0;
 			try
 			{
-				row->teamId = dataVec[index++];
-				row->timeStamp = MissionTime(dataVec[index++]);
-				row->packetCount = std::stoi(dataVec[index++]);
-				row->accData = Accelerometer(std::stod(dataVec[index++]),
-					std::stod(dataVec[index++]),
-					std::stod(dataVec[index++]));
-				row->pitchRollYaw = Gyroscope(std::stoi(dataVec[index++]),
-					std::stoi(dataVec[index++]),
-					std::stoi(dataVec[index++]));
-				row->altitude = Altitude(std::stod(dataVec[index++]));
-				row->temp = Temperature(std::stod(dataVec[index++]), Temperature::Unit::Celsius);
-				row->voltage = Voltage(std::stod(dataVec[index++]));
-				row->gnssData = Gnss(Altitude(std::stoi(dataVec[index++])),
-					dataVec[index++],
-					dataVec[index++],
-					dataVec[index++]);
-				row->rpm1 = std::stoi(dataVec[index++]);
-				row->rpm2 = std::stoi(dataVec[index++]);
-				row->fswState = dataVec[index++];
-				row->camera = dataVec[index++];
-				row->mechgyro = dataVec[index++];
-				row->lidServoEjection = dataVec[index++];
-				row->paraControl = dataVec[index++];
-				row->finsDeployment = dataVec[index++];
-				row->buzzStatus = dataVec[index++];
+				unsigned int index = 0;
+				if (index + 1 < dataVec.size() - 1)
+					row->teamId = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->timeStamp = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->packetCount = std::stoi(dataVec[index++]);
+				if (index + 3 < dataVec.size() - 1)
+					row->accData = Accelerometer(std::stod(dataVec[index++]),
+						std::stod(dataVec[index++]),
+						std::stod(dataVec[index++]));
+				if (index + 3 < dataVec.size() - 1)
+					row->pitchRollYaw = Gyroscope(std::stoi(dataVec[index++]),
+						std::stoi(dataVec[index++]),
+						std::stoi(dataVec[index++]));
+				if (index + 1 < dataVec.size() - 1)
+					row->altitude = std::stod(dataVec[index++]);
+				if (index + 1 < dataVec.size() - 1)
+					row->temp = std::stod(dataVec[index++]);
+				if (index + 1 < dataVec.size() - 1)
+					row->voltage = Voltage(std::stod(dataVec[index++]));
+				if (index + 4 < dataVec.size() - 1)
+					row->gnssData = Gnss(std::stoi(dataVec[index++]),
+						dataVec[index++],
+						dataVec[index++],
+						dataVec[index++]);
+				if (index + 1 < dataVec.size() - 1)
+					row->rpm1 = std::stoi(dataVec[index++]);
+				if (index + 1 < dataVec.size() - 1)
+					row->rpm2 = std::stoi(dataVec[index++]);
+				if (index + 1 < dataVec.size() - 1)
+					row->fswState = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->camera = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->mechgyro = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->lidServoEjection = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->paraControl = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->finsDeployment = dataVec[index++];
+				if (index + 1 < dataVec.size() - 1)
+					row->buzzStatus = dataVec[index++];
 
 				return row;
 			}

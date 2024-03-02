@@ -24,13 +24,10 @@ namespace Vyom
 		: public QObject
 	{
 		Q_OBJECT
-		Q_PROPERTY(InputData value READ value NOTIFY sgnl_DataChanged)
 
 	public:
 		Updater(Devices::Device* dev, QObject* parent = nullptr);
 		~Updater();
-
-		InputData value() const { return m_Data; }
 
 	public slots:
 		void slt_SetInputData(InputData* data);
@@ -39,7 +36,6 @@ namespace Vyom
 		void sgnl_DataChanged(InputData* data);
 
 	private:
-		InputData m_Data;
 		Devices::Device* m_Device;
 	};
 }
