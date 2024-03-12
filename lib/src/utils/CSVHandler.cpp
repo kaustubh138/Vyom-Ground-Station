@@ -5,9 +5,9 @@ namespace Vyom
     namespace Utils
     {
         CSVHandler::CSVHandler(const std::string& filename, CSVParserModes::ReadMode read)
-            : m_Document(filename, rapidcsv::LabelParams(0, 0)), m_FilePath(filename)
+            : m_Document(filename, rapidcsv::LabelParams(-1, -1)), m_FilePath(filename)
         {
-            m_Size = DimType{m_Document.GetColumnCount(), m_Document.GetRowCount()};
+            m_Size = DimType{m_Document.GetRowCount(), m_Document.GetColumnCount()};
         }
         
         CSVHandler::CSVHandler(const std::string& filename, CSVParserModes::WriteMode write)
@@ -23,7 +23,7 @@ namespace Vyom
                     std::cout << "[ERROR] Unable to create file" << m_FilePath;
             }
                 
-            m_Document = rapidcsv::Document(filename, rapidcsv::LabelParams(0, 0));
+            m_Document = rapidcsv::Document(filename, rapidcsv::LabelParams(-1, -1));
             m_Size = DimType{m_Document.GetColumnCount(), m_Document.GetRowCount()};
         }
         

@@ -7,14 +7,26 @@
 #include "Data.hpp"
 #include "TelemeteryView.hpp"
 #include "Updater.hpp"
-#include "../src/devices/Serial.hpp"
+
+#define INPUT_CSV
+
+#ifdef INPUT_CSV
+    #include "../src/devices/CSVFile.hpp"
+#else
+    #include "../src/devices/Serial.hpp"
+#endif
 
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+#ifdef INPUT_CSV
+    Vyom::Devices::CSVFile* device = new Vyom::Devices::CSVFile("dummy_data.csv");
+    device->Recieve();
+#else
     Vyom::Devices::Serial* device = new Vyom::Devices::Serial("COM7");
+#endif
 
     Vyom::Updater* updater = new Vyom::Updater(device);
 

@@ -44,9 +44,9 @@ namespace Vyom
 
             template<typename T>
             std::vector<T> GetRow(std::size_t row) {
-                std::vector<T> data;
+                std::vector<T> data{};
                 for (std::size_t c = 0; c < GetColCount(); c++) {
-                    data.push_back(GetCell<T>(row, c));
+                    data.emplace_back(GetCell<T>(row, c));
                 }
                 return data;
             }

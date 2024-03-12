@@ -81,6 +81,54 @@ namespace Vyom
 				return nullptr;
 			}
 		}
+		
+		static InputData* StringParser(const std::vector<std::string>& dataVec)
+		{
+			InputData* row = new InputData{};
+			row->telemeteryView = "";
+
+			std::string telemeteryViewString = "";
+			for (std::string i : dataVec)
+				telemeteryViewString += i + ",";
+			
+			row->telemeteryView += QString::fromStdString(telemeteryViewString);
+
+			try
+			{
+				unsigned int index = 0;
+				row->teamId = dataVec[index++];
+				row->timeStamp = dataVec[index++];
+				row->packetCount = std::stoi(dataVec[index++]);
+				row->accData = Accelerometer(std::stod(dataVec[index++]),
+					std::stod(dataVec[index++]),
+					std::stod(dataVec[index++]));
+				row->pitchRollYaw = Gyroscope(std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]),
+					std::stoi(dataVec[index++]));
+				row->altitude = std::stod(dataVec[index++]);
+				row->temp = std::stod(dataVec[index++]);
+				row->voltage = Voltage(std::stod(dataVec[index++]));
+				row->gnssData = Gnss(std::stoi(dataVec[index++]),
+					dataVec[index++],
+					dataVec[index++],
+					dataVec[index++]);
+				row->rpm1 = std::stoi(dataVec[index++]);
+				row->rpm2 = std::stoi(dataVec[index++]);
+				row->fswState = dataVec[index++];
+				row->camera = dataVec[index++];
+				row->mechgyro = dataVec[index++];
+				row->lidServoEjection = dataVec[index++];
+				row->paraControl = dataVec[index++];
+				row->finsDeployment = dataVec[index++];
+				row->buzzStatus = dataVec[index++];
+
+				return row;
+			}
+			catch(...)
+			{
+				return nullptr;
+			}
+		}
 	}
 }
 

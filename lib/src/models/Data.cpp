@@ -12,12 +12,12 @@ namespace Vyom
         {
         case(DataModel::Temperature):
         {
-            m_Value.setY(29);
+            m_Value.setY(data->temp);
             break;
         }
         case(DataModel::Altitude):
         {
-            m_Value.setY(568.21);
+            m_Value.setY(data->altitude);
             break;
         }
         case(DataModel::Voltage):
