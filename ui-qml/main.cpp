@@ -14,14 +14,15 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    Vyom::Devices::Serial* device = new Vyom::Devices::Serial("COM6");
+    Vyom::Devices::Serial* device = new Vyom::Devices::Serial("COM7");
 
     Vyom::Updater* updater = new Vyom::Updater(device);
 
     Vyom::Data* altitudeData = new Vyom::Data(updater, Vyom::DataModel::Altitude);
     Vyom::Data* temperatureData = new Vyom::Data(updater, Vyom::DataModel::Temperature);
     Vyom::Data* voltageData = new Vyom::Data(updater, Vyom::DataModel::Voltage);
-    Vyom::Data* dummyData = new Vyom::Data(updater, Vyom::DataModel::None);
+    Vyom::Data* yawData = new Vyom::Data(updater, Vyom::DataModel::yaw);
+    Vyom::Data* pitchData = new Vyom::Data(updater, Vyom::DataModel::pitch);
 
     Vyom::TelemeteryView* telemetery = new Vyom::TelemeteryView(updater);
     
@@ -29,7 +30,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("altitudeData", altitudeData);
     engine.rootContext()->setContextProperty("tempData", temperatureData);
     engine.rootContext()->setContextProperty("voltageData", voltageData);
-    engine.rootContext()->setContextProperty("dummyData", dummyData);
+    engine.rootContext()->setContextProperty("yaw", yawData);
+    engine.rootContext()->setContextProperty("pitch", pitchData);
     
     engine.rootContext()->setContextProperty("telemeteryViewModel", telemetery);
     

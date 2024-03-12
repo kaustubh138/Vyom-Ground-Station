@@ -114,7 +114,7 @@ ColumnLayout{
                               topMargin:15
                                     }
                          color:"green"
-                         text: qsTr(" 130 ")
+                         text: qsTr("")
                          font.pixelSize: 18
                           }
                            
@@ -142,7 +142,7 @@ ColumnLayout{
                               topMargin:15
                                     }
                          color:"red"
-                         text: qsTr("0")
+                         text: qsTr("")
                          font.pixelSize: 18
                           }
 
@@ -205,22 +205,30 @@ ColumnLayout{
                               }
                    }
 
-            Repeater
-                {
-                    model: 2
+            Item  {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredWidth: 50
+                Layout.preferredHeight: 34
+
+
+                Yaw {
+
+                              }
+                   }
                     Item {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
                         Layout.preferredWidth: 50
                         Layout.preferredHeight: 34
 
-                        Chart {
+                        Pitch {
 
                                }
                           }
 
 
-                }
+                
                   
 
              Rectangle {

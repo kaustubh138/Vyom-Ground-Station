@@ -32,7 +32,9 @@ namespace Vyom
         Temperature = 0,
         Altitude = 1,
         Voltage = 2,
-        None = 3
+        None = 3,
+        yaw=4,
+        pitch=5
     };
 
     struct MissionTime {
@@ -158,7 +160,7 @@ namespace Vyom
 			  m_GyroZ(gyro_z)
 		{}
 
-	private:
+	public:
         int m_GyroX, m_GyroY, m_GyroZ;
 	};
 

@@ -12,17 +12,27 @@ namespace Vyom
         {
         case(DataModel::Temperature):
         {
-            m_Value.setY(data->temp);
+            m_Value.setY(29);
             break;
         }
         case(DataModel::Altitude):
         {
-            m_Value.setY(data->altitude);
+            m_Value.setY(568.21);
             break;
         }
         case(DataModel::Voltage):
         {
             m_Value.setY(data->voltage);
+            break;
+        }
+        case (DataModel::yaw):
+        {
+            m_Value.setY(data->pitchRollYaw.m_GyroZ);
+            break;
+        }
+        case (DataModel::pitch):
+        {
+            m_Value.setY(data->pitchRollYaw.m_GyroX);
             break;
         }
         default: {
